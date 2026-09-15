@@ -1,45 +1,51 @@
 # Tienda Web Configurable
 
-**Propuesta: Tienda Web Personalizable para pequeños negocios.**
+Proyecto personal y público de portafolio de **AxelUma**: una plataforma para que pequeños negocios administren su catálogo, contenido e identidad visual y compongan su tienda mediante secciones reutilizables.
 
-Estado al **13 de septiembre de 2026**: planificación y documentación. No hay aplicación implementada, solución .NET, frontend React, base de datos creada ni despliegue. La propuesta no tiene selección o aprobación del profesor confirmada. Puede continuar como proyecto personal aunque se elija otra para el curso.
+## Problema y concepto del producto
 
-## Objetivo
+El proyecto busca reducir el trabajo de crear y mantener un sitio a medida para cada negocio. Una misma aplicación atenderá múltiples compañías, con administración independiente y aislamiento de datos. Esta necesidad es una hipótesis pendiente de validar con negocios reales.
 
-Permitir que una compañía cree una cuenta administrativa, gestione su contenido y productos, y componga el inicio de su tienda mediante diseños de secciones preparados por el equipo. El resultado se demuestra con una **vista previa funcional**. Una panadería o repostería es el ejemplo propuesto; todavía no existe un negocio concreto elegido ni un diagnóstico validado con entrevistas.
+Cada tienda tendrá una página pública y un editor: el administrador seleccionará diseños preparados, completará su contenido y podrá añadir, quitar, repetir y ordenar secciones. Una plantilla representa el diseño de una sección, no un sitio completo. El constructor no será un editor HTML libre.
 
-La referencia para personalizar es **elegir diseños de diapositivas en PowerPoint**: añadir una sección, seleccionar su disposición y rellenar sus espacios. Se puede repetir un diseño con contenido independiente. No se limita la página a dos diseños completos ni a dos secciones fijas.
+## Capacidades previstas
 
-## Alcance que se viene proponiendo
+- Compañías, usuarios administrativos y autorización por compañía.
+- Catálogo, categorías, productos e imágenes.
+- Identidad visual configurable, páginas, secciones y vista previa.
+- Storefront público separado de la administración.
+- Carrito, checkout y pedidos con pago simulado inicialmente.
+- Noticias, contenido y multimedia.
 
-- Cuenta administrativa por compañía; información y permisos separados por compañía.
-- Panel independiente con **Parámetros, Productos, Noticias y Personalizar Tienda**.
-- Inicio compuesto por secciones que se pueden añadir, quitar, ordenar y repetir.
-- Header y footer de estructura limitada, con contenido y apariencia configurables.
-- Tienda y carrito con distribución fija en esta primera versión.
-- Pago simulado que cambia el estado del pedido, sin procesar dinero.
-- Multimedia y noticias, más funciones del sílabo cuya ubicación exacta sigue por concretar.
-- Vista previa funcional, demostrable localmente.
+Las cuentas de compradores siguen abiertas; no son un requisito obligatorio. Ninguna de estas capacidades está implementada todavía.
 
-**No se acordaron cuentas de compradores, pago al recoger ni una instalación por negocio.** Esas interpretaciones anteriores fueron corregidas. La publicación, exportación y alojamiento comercial son ampliaciones, no promesas para el curso.
+## Arquitectura y stack previstos
 
-## Tecnologías propuestas
+| Área | Dirección |
+| --- | --- |
+| Backend | C# / ASP.NET Core modular; Domain, Application, Infrastructure y API; inspiración en Clean Architecture y DDD sin dogmatismo |
+| Frontend | React + TypeScript por features y componentes reutilizables; HTML y CSS para la interfaz |
+| Persistencia | MySQL elegido; Entity Framework Core previsto, sujeto a validar proveedor y compatibilidad |
+| Entrega | CI básico al iniciar el código; infraestructura y demo pública en fases posteriores |
 
-C# / ASP.NET Core para la API; React con TypeScript para el frontend; HTML, CSS y Bootstrap para la interfaz; peticiones AJAX con `fetch`; **MySQL**, elegido por Axel porque ya cuenta con él. Arquitectura ligera inspirada en Clean Architecture y DDD. Versiones, bibliotecas de persistencia y autenticación siguen pendientes.
+Application coordinará casos de uso, Domain concentrará reglas de negocio e Infrastructure resolverá persistencia y servicios externos. La API expondrá esos casos de uso. No se prevén microservicios sin una razón técnica real. Versiones, autenticación, bibliotecas de interfaz y estrategia cloud están pendientes.
+
+## Estado actual
+
+**Diseño/fundación — 14 de septiembre de 2026.** El repositorio contiene documentación y reglas de trabajo. No existen solución .NET, proyecto React, migraciones, esquema definitivo, dependencias instaladas ni despliegue.
+
+El objetivo es demostrar experiencia FullStack, especialmente backend .NET, con decisiones justificadas, pruebas y una entrega reproducible. Se podrán incorporar tecnologías nuevas cuando aporten valor técnico.
 
 ## Documentación
 
-1. [Alcance y comportamiento](docs/01-alcance.md): pantallas, usuarios, editor y límites.
-2. [Arquitectura y datos](docs/02-arquitectura-y-datos.md): propuesta técnica, relaciones y archivos.
-3. [Decisiones, correcciones y pendientes](docs/03-decisiones-y-pendientes.md): evolución y asuntos abiertos.
-4. [Contexto académico](docs/04-contexto-academico.md): entregas, rúbricas y relación con el curso.
-5. [Trabajo en equipo y próximos pasos](docs/05-planificacion.md): reparto tentativo y secuencia sugerida.
-6. [Contexto para otra conversación](docs/06-contexto-para-chat.md): resumen autocontenido para adjuntar a ChatGPT.
+- [Visión](docs/product/vision.md), [requisitos y preguntas de producto](docs/product/requirements.md) y [roadmap](docs/product/roadmap.md).
+- [Arquitectura y estructura futura](docs/architecture/overview.md), [modelo conceptual](docs/architecture/domain-model.md), [multi-tenancy](docs/architecture/multitenancy.md), [seguridad](docs/architecture/security.md) y [persistencia](docs/architecture/database.md).
+- [Architecture Decision Records](docs/architecture/adr/README.md).
+- [Cómo empezar](docs/development/getting-started.md), [despliegue previsto](docs/deployment/README.md) y [guía para agentes](AGENTS.md).
+- [Archivo histórico](docs/archive/academic-context.md), sin autoridad sobre el alcance actual.
 
-Los documentos separan **definiciones expresadas por Axel**, **propuestas técnicas** y **decisiones pendientes**. No constituyen aprobación del equipo ni especificación cerrada.
+## Roadmap resumido
 
-## Procedencia y mantenimiento
+Foundation → Identity & Multi-tenancy → Catalog → Store Builder → Commerce → Content & Media → Quality → Infrastructure → Delivery.
 
-Esta documentación consolida la conversación de planificación con el asistente llamado Nano, las notas locales iniciales y la propuesta compartida con los compañeros. Sustituye como referencia de trabajo las notas antiguas de `contexto-proyecto`, que contienen supuestos posteriormente corregidos. No se copiaron los textos de las otras propuestas ni los PDF del curso a este repositorio.
-
-Actualizar estas notas cuando el grupo o el profesor decidan el alcance. No confundir una posibilidad conversada con un requisito aprobado. El propósito inmediato es conservar el contexto para separar tareas y preparar una estructura, sin implementar todavía.
+Las fases son evolutivas. Pruebas, seguridad y documentación acompañarán al código desde el inicio; Quality profundizará esas prácticas. La entrega prevista incluye una demo pública, sin proveedor ni fecha comprometidos.

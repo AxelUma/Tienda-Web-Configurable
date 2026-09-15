@@ -1,3 +1,46 @@
+# Contexto académico — archivo histórico
+
+Desde el **14 de septiembre de 2026**, Tienda Web Configurable dejó de formar parte del proyecto académico y continúa como proyecto personal y público de portafolio.
+
+**Todo este archivo es histórico. No define requisitos, alcance, tecnologías, plazos, responsables ni condiciones de entrega vigentes.** Las referencias a selección del profesor y obligaciones del curso describen el estado anterior al cambio, no pendientes actuales.
+
+## Procedencia y evolución
+
+Se exploró Tienda como una de tres propuestas junto con asesoramiento fitness y parqueos. Las otras propuestas no definen tecnologías ni requisitos de Tienda. Hubo notas TXT, borradores y edición de un documento conjunto; fue trabajo documental, no implementación. Las notas externas y el sílabo no están en este repositorio y no se verificaron nuevamente durante el reset.
+
+Se contemplaron aproximadamente dos integrantes y un reparto tentativo: compañero en administración; Axel en editor, diseños, vista previa y storefront; API por funcionalidades y pruebas/documentación compartidas. Nunca fue una asignación definitiva y no tiene vigencia operativa.
+
+El límite anterior de solo vista previa local y hosting como extra queda superado: el roadmap personal incluye demo pública con estrategia de despliegue abierta. Selección docente, aceptación académica de TypeScript, cantidad de herramientas, semanas y reparto grupal dejaron de ser pendientes del producto.
+
+## Registro del reset documental
+
+| Documento anterior | Destino del contenido útil |
+| --- | --- |
+| README.md | README reescrito como entrada al producto personal |
+| docs/01-alcance.md | product/vision.md y product/requirements.md |
+| docs/02-arquitectura-y-datos.md | architecture/overview.md, domain-model.md, multitenancy.md, security.md, database.md y ADR-0001 |
+| docs/03-decisiones-y-pendientes.md | Decisiones y Open Questions de producto, arquitectura y despliegue; historia en este archivo |
+| docs/04-contexto-academico.md | Este archivo, con el original íntegro a continuación |
+| docs/05-planificacion.md | product/roadmap.md, development/getting-started.md y validaciones en requirements.md |
+| docs/06-contexto-para-chat.md | Contenido técnico consolidado en documentación normal e instrucciones operativas en AGENTS.md |
+
+### Contradicciones y ambigüedades resueltas
+
+- “No cuentas de compradores” podía leerse como prohibición: ahora la decisión sigue abierta y no son obligatorias.
+- EF Core aparecía como posibilidad; ahora es dirección prevista condicionada a proveedor y compatibilidad.
+- La estructura por capas pasa de sugerencia inicial a arquitectura prevista explícita, sin implicar código existente.
+- Bootstrap/fetch aparecían mezclados con elecciones del stack: se conservan como propuestas.
+- Valores asociados solo a compañía no garantizan independencia de bloques repetidos: cualquier alternativa futura debe asociar contenido a cada instancia.
+- Los límites de vista previa, aprobación docente y elección entre curso/proyecto personal quedan superados por la nueva dirección.
+
+### Información no trasladada a documentación vigente
+
+Rúbricas, porcentajes, fechas, reparto grupal y selección docente quedan solo como historia. No se conservaron como instrucciones operativas el nombre del asistente, estimaciones de años de experiencia, formatos de mensajes a compañeros ni el título “Propuesta 1”: no afectan al producto ni a su mantenimiento. Se consolidaron resúmenes duplicados. Los detalles técnicos de otras propuestas nunca fueron requisitos de Tienda.
+
+## Documento académico anterior (estado registrado al 13 de septiembre de 2026)
+
+El siguiente texto se conserva íntegro. Sus formulaciones en presente son históricas y no tienen autoridad sobre el producto actual.
+
 # Contexto académico y rúbricas
 
 Fuente: lectura del SILABO.pdf del curso, conservado en la carpeta local del curso (fuera de este repositorio). Referencias a páginas del PDF; las aclaraciones del docente y el sílabo original prevalecen sobre este resumen.
