@@ -18,6 +18,8 @@ Este vocabulario orienta el diseño; **no es un esquema definitivo**, DDL, lista
 
 PageSection corresponde al antiguo BloquePagina y SectionTemplate a PlantillaBloque. Los nombres finales de código quedan abiertos. No se añade automáticamente una entidad de comprador registrado.
 
+[ADR-0004](adr/0004-shared-database-multitenancy.md) define tablas compartidas con CompanyId/TenantId para datos de compañía; no fija claves ni cardinalidades definitivas. Identity resuelve la tecnología de identidad administrativa, no el modelo de una o múltiples memberships ni los roles. Domain no debe depender de tipos de Identity.
+
 ## Invariantes conceptuales
 
 - La información de una compañía respeta aislamiento de tenant, incluidas relaciones.

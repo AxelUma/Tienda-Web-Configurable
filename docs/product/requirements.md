@@ -32,7 +32,7 @@ Estas direcciones podrán revisarse por motivos de producto o usabilidad documen
 
 - Plantillas: título con imagen grande, imagen/texto en ambos órdenes, galería y listado de noticias. Catálogo inicial y límites pendientes.
 - Controles de subir/bajar secciones; arrastrar y soltar no es obligatorio.
-- Menú adaptable a celular y apilado del footer; comportamiento por definir considerando accesibilidad.
+- Menú adaptable a celular y apilado del footer como soluciones propuestas al objetivo responsive; comportamiento concreto por definir considerando accesibilidad.
 - Parámetros adicionales: dirección, horarios, misión y visión. Su ubicación respecto al editor sigue pendiente.
 - Productos: descripción, precio y disponibilidad; noticias: título, imagen, fecha y cuerpo. No son un esquema aprobado.
 - Multimedia independiente y galerías insertadas en páginas; relación por definir.
@@ -47,6 +47,22 @@ Estas direcciones podrán revisarse por motivos de producto o usabilidad documen
 - Los parámetros compartidos se reutilizan sin valores contradictorios.
 - El servidor valida cantidades, precios, totales y transiciones; el pedido conserva precios de la operación y el pago se identifica como simulado.
 - Formularios y archivos rechazan entradas inválidas. Una vista previa local no demuestra preparación para producción.
+
+## Requisitos no funcionales iniciales
+
+Dirección de diseño, sin SLOs numéricos ni capacidades operativas ya implementadas:
+
+- Seguridad por defecto: mínimo acceso necesario, aislamiento entre compañías y validación en servidor.
+- Accesibilidad web como objetivo y diseño responsive; interacciones, navegación y presentación utilizables en distintos tamaños de pantalla.
+- Logs estructurados y configuración por entorno, sin registrar secretos ni exponer excepciones internas al cliente.
+- Secretos fuera del repositorio y HTTPS en despliegue.
+- Health checks cuando exista infraestructura; observabilidad, métricas y herramientas concretas siguen abiertas.
+- Migraciones y builds reproducibles, con versiones y configuración documentadas.
+- Pruebas automatizadas junto al código; aislamiento multi-tenant obligatorio desde Phase 1 según la [estrategia de pruebas](../development/testing.md).
+- Evitar dependencias innecesarias y conservar licencias de terceros.
+- Evaluar rendimiento mediante medición, sin optimización prematura.
+
+No se afirman implementados logging, observabilidad, backups, métricas ni cloud. Los detalles operativos se resolverán según necesidades reales.
 
 ## Open Questions
 

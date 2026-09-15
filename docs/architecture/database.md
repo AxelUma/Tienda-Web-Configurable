@@ -2,9 +2,13 @@
 
 ## Decisiones y dirección
 
-**MySQL está elegido**: [ADR-0001](adr/0001-use-mysql.md). No hay versión seleccionada, base creada, esquema definitivo ni migraciones.
+**MySQL sigue elegido** en [ADR-0001](adr/0001-use-mysql.md). [ADR-0003](adr/0003-ef-core-mysql-provider.md) acepta **EF Core 10**, **MySql.EntityFrameworkCore oficial de Oracle** y **MySQL Server 8.4 LTS**. Referencias investigadas: EF Core **10.0.12** y proveedor **10.0.9**; usar el parche soportado más reciente de MySQL 8.4 al desplegar.
 
-Entity Framework Core es la dirección prevista, condicionada a validar proveedor MySQL y compatibilidad con .NET, EF Core y servidor. No hay proveedor ni paquetes seleccionados.
+Los parches no son una congelación permanente: actualizar con compatibilidad verificada y pruebas apropiadas. Pomelo no se adopta actualmente por falta de release estable para EF Core 10 en la investigación; revisar si aparece una alternativa estable con ventajas reales. Conservar licencia propia del proveedor y licencias/avisos de terceros.
+
+[ADR-0004](adr/0004-shared-database-multitenancy.md) fija una base y tablas compartidas con CompanyId/TenantId en datos de compañía; no database-per-tenant ni schema-per-tenant inicialmente. Query filters como defensa de lectura más validaciones de escrituras/relaciones y restricciones por tenant cuando sea viable.
+
+No hay base creada, esquema definitivo, paquetes instalados ni migraciones. La selección está aceptada; la verificación en ejecución se realizará con la implementación.
 
 MySQL conservará datos del negocio y referencias de archivos. Los archivos se prevén en almacenamiento persistente externo a las tablas de contenido, sin proveedor elegido. El [modelo de dominio](domain-model.md) es conceptual.
 
@@ -26,12 +30,11 @@ Galerías requieren colecciones, no solo título/texto/imagen. Un eventual model
 - Consultas y validación por diseño, sin perder contenido de instancias.
 - Snapshots de precios en OrderItem y pedidos históricos frente a cambios del catálogo.
 - Evolución de diseños, migraciones y restauración.
-- Compatibilidad del proveedor con operaciones, transacciones y pruebas necesarias.
+- Verificación del proveedor elegido con operaciones, transacciones y pruebas necesarias contra MySQL real; EF InMemory no sustituye persistencia relevante.
 
 ## Open Questions
 
-- Proveedor EF Core y matriz de versiones: validar antes de cerrar la elección.
-- Estrategia física multi-tenant, claves, restricciones e índices.
+- Claves, foreign keys, unique constraints e índices concretos que preserven integridad por compañía en tablas compartidas.
 - Formato de PageSection y evolución/versionado de contenido.
 - Esquema, agregados, cardinalidades y persistencia de plantillas.
 - Migraciones, datos de demo, backups y restauración.

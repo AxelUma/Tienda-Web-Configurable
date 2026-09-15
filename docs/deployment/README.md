@@ -1,17 +1,19 @@
 # Despliegue previsto
 
-Sin despliegue ni proveedor elegido. Delivery busca una demo pública reproducible con frontend, API y MySQL desplegados, HTTPS y configuración segura.
+Sin despliegue ni proveedor elegido. Delivery busca una demo pública reproducible con frontend, API y MySQL Server 8.4 LTS desplegados, HTTPS y configuración segura.
 
 ## Dirección del roadmap
 
 - Docker y Docker Compose, configuración de entornos y health checks.
-- Logging y observabilidad básica.
+- Logs estructurados y observabilidad básica; herramientas concretas aún abiertas.
 - Ampliar CI básico a GitHub Actions con validaciones completas y CD cuando exista destino definido.
 - Documentar configuración, secretos, persistencia y recuperación.
 
 Son actividades futuras y evolutivas; no hay contenedores, workflows ni infraestructura creada.
 
 ## Consideraciones
+
+Usar el parche soportado más reciente de MySQL 8.4 LTS al desplegar. Mantener configuración por entorno y secretos fuera del repositorio. El baseline de Identity/cookies requiere HttpOnly, Secure en producción y diseño de SameSite/antiforgery coherente con los orígenes elegidos. No se selecciona proveedor cloud ni topología de dominios todavía.
 
 Una vista previa local no equivale a producción. Publicar/exportar archivos del frontend no despliega la API .NET ni MySQL. Con orígenes distintos se necesita API HTTPS accesible y políticas coherentes con autenticación.
 
@@ -23,7 +25,8 @@ Cambiar contenido de compañía obtenido de la API no debería requerir recompil
 - Entornos, dominios, rutas por compañía y certificados.
 - Secretos, backups, restauración y persistencia en contenedores.
 - CD, aprobación de despliegues y recuperación ante fallos.
-- Herramientas de logging, métricas y health checks.
+- Herramientas de logging, métricas, health checks y observabilidad concreta.
+- CDN, caché/Redis y message broker: sin selección ni incorporación anticipada.
 - Borrador/publicación y exposición de la demo.
 
 Sites fue una opción mencionada para una demo; no está seleccionado ni existe integración. La estrategia cloud requiere evaluación y ADR.

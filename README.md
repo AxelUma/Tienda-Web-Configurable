@@ -23,16 +23,20 @@ Las cuentas de compradores siguen abiertas; no son un requisito obligatorio. Nin
 
 | Área | Dirección |
 | --- | --- |
-| Backend | C# / ASP.NET Core modular; Domain, Application, Infrastructure y API; inspiración en Clean Architecture y DDD sin dogmatismo |
-| Frontend | React + TypeScript por features y componentes reutilizables; HTML y CSS para la interfaz |
-| Persistencia | MySQL elegido; Entity Framework Core previsto, sujeto a validar proveedor y compatibilidad |
+| Backend | .NET 10 LTS, ASP.NET Core 10 y C# 14; arquitectura modular por capas Domain, Application, Infrastructure y API |
+| Frontend | React 19.3, TypeScript 6 estable, Vite 8.x, Node.js 24 LTS y npm; organización por features |
+| Persistencia | EF Core 10, MySql.EntityFrameworkCore oficial de Oracle y MySQL Server 8.4 LTS |
+| Multi-tenancy | Una aplicación, base y tablas compartidas; discriminador CompanyId/TenantId y defensas en lecturas, escrituras y relaciones |
+| Autenticación administrativa | ASP.NET Core Identity y cookies; protección CSRF y cookies HttpOnly/Secure en producción |
 | Entrega | CI básico al iniciar el código; infraestructura y demo pública en fases posteriores |
 
-Application coordinará casos de uso, Domain concentrará reglas de negocio e Infrastructure resolverá persistencia y servicios externos. La API expondrá esos casos de uso. No se prevén microservicios sin una razón técnica real. Versiones, autenticación, bibliotecas de interfaz y estrategia cloud están pendientes.
+Application coordinará casos de uso, Domain concentrará reglas de negocio e Infrastructure resolverá persistencia y servicios externos. La API expondrá esos casos de uso y compondrá dependencias. No se añaden repositorios genéricos, MediatR/CQRS, microservicios o event bus por defecto.
+
+El [baseline técnico](docs/development/technical-baseline.md) registra SDK 10.0.401, parches iniciales y política de actualización. React Router y TanStack Query se incorporarán cuando un flujo los necesite. REST JSON, ProblemDetails y códigos HTTP semánticos son las convenciones iniciales. Persistencia de PageSection, membresías, roles y cloud siguen abiertos.
 
 ## Estado actual
 
-**Diseño/fundación — 14 de septiembre de 2026.** El repositorio contiene documentación y reglas de trabajo. No existen solución .NET, proyecto React, migraciones, esquema definitivo, dependencias instaladas ni despliegue.
+**Phase 0 — Foundation (diseño/fundación).** Decisiones técnicas formalizadas el 14 de septiembre de 2026. El repositorio contiene documentación, AGENTS.md, .gitignore y LICENSE. No existen solución .NET, proyecto React, migraciones, esquema definitivo, dependencias instaladas, workflows ni despliegue.
 
 El objetivo es demostrar experiencia FullStack, especialmente backend .NET, con decisiones justificadas, pruebas y una entrega reproducible. Se podrán incorporar tecnologías nuevas cuando aporten valor técnico.
 
@@ -42,6 +46,7 @@ El objetivo es demostrar experiencia FullStack, especialmente backend .NET, con 
 - [Arquitectura y estructura futura](docs/architecture/overview.md), [modelo conceptual](docs/architecture/domain-model.md), [multi-tenancy](docs/architecture/multitenancy.md), [seguridad](docs/architecture/security.md) y [persistencia](docs/architecture/database.md).
 - [Architecture Decision Records](docs/architecture/adr/README.md).
 - [Cómo empezar](docs/development/getting-started.md), [despliegue previsto](docs/deployment/README.md) y [guía para agentes](AGENTS.md).
+- [Baseline técnico y actualizaciones](docs/development/technical-baseline.md) y [estrategia de pruebas](docs/development/testing.md).
 - [Archivo histórico](docs/archive/academic-context.md), sin autoridad sobre el alcance actual.
 
 ## Roadmap resumido
@@ -49,3 +54,7 @@ El objetivo es demostrar experiencia FullStack, especialmente backend .NET, con 
 Foundation → Identity & Multi-tenancy → Catalog → Store Builder → Commerce → Content & Media → Quality → Infrastructure → Delivery.
 
 Las fases son evolutivas. Pruebas, seguridad y documentación acompañarán al código desde el inicio; Quality profundizará esas prácticas. La entrega prevista incluye una demo pública, sin proveedor ni fecha comprometidos.
+
+## Licencia
+
+[MIT License](LICENSE) — Copyright (c) 2026 AxelUma. Las dependencias de terceros conservan sus propias licencias y avisos, incluido el proveedor MySQL de Oracle.

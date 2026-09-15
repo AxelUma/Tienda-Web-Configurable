@@ -1,14 +1,17 @@
 # Guía para agentes
 
 - Proyecto personal y público de portafolio: tiendas configurables para pequeños negocios. Leer README y la documentación del área antes de modificarla.
-- Estado: diseño/fundación. No hay aplicación ni comandos de build definidos. Ejecutar solo el alcance solicitado.
-- Backend previsto: ASP.NET Core modular, inspirado en Clean Architecture y DDD sin dogmatismo. Domain no depende de otras capas; Application depende de Domain; Infrastructure implementa contratos de Application y puede depender de Domain; API usa Application y conecta Infrastructure en la composición de dependencias.
+- Estado: Phase 0 — Foundation. No hay aplicación ni comandos de build definidos. Ejecutar solo el alcance solicitado.
+- Backend aceptado: .NET 10 LTS, ASP.NET Core 10 y C# 14; arquitectura modular por capas, inspirada en Clean Architecture y DDD sin dogmatismo. Domain no depende de otras capas; Application depende de Domain; Infrastructure implementa contratos necesarios de Application y puede depender de Domain; API usa Application y conecta Infrastructure como composition root.
 - Organizar backend por features/casos de uso dentro de las capas. Reglas de negocio en Domain y coordinación en Application, nunca en controllers.
-- Frontend previsto: React + TypeScript por features, componentes reutilizables y separación entre administración y storefront.
-- MySQL está elegido. EF Core es la dirección prevista, pendiente de validar proveedor y compatibilidad. No asumir decisiones de las secciones Open Questions.
+- Respetar el [baseline técnico](docs/development/technical-baseline.md): SDK inicial 10.0.401 y futuro global.json; no .NET 11 RC. Frontend React 19.3, TypeScript 6 estable, Vite 8.x, Node.js 24 LTS y npm por features, separando administración/storefront. No CRA ni TypeScript 7 beta; React Router/TanStack Query cuando se necesiten, sin estado global adicional por defecto.
+- Persistencia aceptada: EF Core 10, MySql.EntityFrameworkCore oficial de Oracle y MySQL 8.4 LTS. Permitir parches compatibles verificados y conservar licencias de terceros. No asumir Open Questions.
 - Toda entidad perteneciente a una compañía debe respetar aislamiento de tenant. Validar pertenencia y autorización en servidor en lecturas, escrituras, relaciones y archivos. Un identificador del cliente no concede acceso.
+- Base y tablas compartidas con CompanyId/TenantId. Tenant administrativo desde identidad/autorización; slug público no concede permisos administrativos. Query filters como defensa de lectura, nunca única; validar escrituras/relaciones y diseñar restricciones por tenant. Revisar raw SQL y operaciones sin filtros.
+- Panel administrativo con ASP.NET Core Identity y cookies HttpOnly, Secure en producción, SameSite y antiforgery apropiados. No tokens en localStorage ni JWT por defecto para el SPA. Memberships y roles siguen abiertos.
+- HTTP: REST JSON, ProblemDetails/ValidationProblemDetails y códigos semánticos; no envelope genérico success/data/message ni /api/v1 anticipado. No exponer excepciones internas.
 - Una plantilla define una sección; cada instancia conserva contenido y orden propios. No introducir HTML libre ni instalaciones por compañía. Las cuentas de compradores siguen abiertas.
-- Preferir soluciones simples que resuelvan correctamente el problema. Evitar repositorios genéricos, abstracciones y microservicios sin necesidad demostrada.
+- Preferir soluciones simples que resuelvan correctamente el problema. Evitar generic repository por defecto, abstracciones, MediatR/CQRS, microservicios y event bus sin necesidad concreta.
 - No añadir paquetes/dependencias sin razón técnica. Se permiten tecnologías y prácticas nuevas cuando aporten valor y aprendizaje relevante; no limitarse a lo conocido por el autor.
 - Registrar cambios arquitectónicos importantes en un [ADR](docs/architecture/adr/README.md), distinguiendo propuestas de decisiones aceptadas.
-- Código nuevo debe incluir pruebas apropiadas, especialmente de aislamiento y reglas de negocio. Actualizar documentación afectada junto con el código y reportar verificaciones realmente ejecutadas.
+- Código nuevo incluye [pruebas apropiadas](docs/development/testing.md): xUnit v3, WebApplicationFactory y Testcontainers/MySQL real para persistencia relevante; no EF InMemory como sustituto. Vitest/React Testing Library y Playwright cuando haya flujos completos. Aislamiento entre al menos dos compañías obligatorio desde Phase 1. Actualizar documentación junto al código y reportar solo verificaciones ejecutadas.

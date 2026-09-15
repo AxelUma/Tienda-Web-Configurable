@@ -10,7 +10,9 @@ La plataforma necesita persistir compañías, catálogo, configuración, conteni
 
 ## Decision
 
-Utilizar MySQL. Versión, esquema, estrategia multi-tenant y proveedor de acceso permanecen pendientes. EF Core es la dirección prevista, sujeta a validación de proveedor y compatibilidad.
+Utilizar MySQL. Al registrar este ADR, versión, esquema, estrategia multi-tenant y proveedor estaban pendientes; EF Core era la dirección prevista. La decisión del motor se mantiene vigente.
+
+Actualización documental del 14 de septiembre de 2026: [ADR-0003](0003-ef-core-mysql-provider.md) resuelve EF Core 10, proveedor Oracle y MySQL 8.4 LTS; [ADR-0004](0004-shared-database-multitenancy.md) resuelve base/tablas compartidas. El esquema permanece abierto. Estos ADR complementan la decisión, no la sustituyen.
 
 ## Alternatives considered
 
@@ -19,6 +21,6 @@ No consta comparación formal de motores para este proyecto. SQL Server y Postgr
 ## Consequences
 
 - Diseño y operación deberán considerar capacidades y restricciones de MySQL.
-- Validar proveedor con .NET, EF Core y MySQL antes de iniciar persistencia.
-- No se aprueban paquetes, migraciones, esquema de PageSection ni cloud.
+- Verificar en implementación el proveedor y las versiones aceptados en ADR-0003 con .NET, EF Core y MySQL.
+- Este ADR decide únicamente el motor; no autoriza instalación de paquetes ni crea migraciones, esquema de PageSection o cloud.
 - Cambiar de motor requerirá evaluación explícita y un ADR que sustituya este.
