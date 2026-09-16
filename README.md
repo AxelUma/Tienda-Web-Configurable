@@ -28,7 +28,7 @@ Las cuentas de compradores siguen abiertas; no son un requisito obligatorio. Nin
 | Persistencia | EF Core 10, MySql.EntityFrameworkCore oficial de Oracle y MySQL Server 8.4 LTS |
 | Multi-tenancy | Una aplicación, base y tablas compartidas; discriminador CompanyId/TenantId y defensas en lecturas, escrituras y relaciones |
 | Autenticación administrativa | ASP.NET Core Identity y cookies; protección CSRF y cookies HttpOnly/Secure en producción |
-| Entrega | CI básico al iniciar el código; infraestructura y demo pública en fases posteriores |
+| Entrega | CI básico con GitHub Actions al crear el scaffolding de Phase 0; delivery completo y CD con destino definido en fases posteriores |
 
 Application coordinará casos de uso, Domain concentrará reglas de negocio e Infrastructure resolverá persistencia y servicios externos. La API expondrá esos casos de uso y compondrá dependencias. No se añaden repositorios genéricos, MediatR/CQRS, microservicios o event bus por defecto.
 

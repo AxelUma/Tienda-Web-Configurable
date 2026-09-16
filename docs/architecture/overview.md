@@ -19,7 +19,7 @@ No se añade generic repository por defecto. MediatR, CQRS, microservicios, even
 
 ## Frontend
 
-**React 19.3, TypeScript 6 estable, Vite 8.x, Node.js 24 LTS y npm**, por features y componentes reutilizables, separando administración y storefront. HTML y CSS siguen siendo parte de la interfaz. No Create React App ni TypeScript 7 mientras sea beta.
+**React 19.3, TypeScript 6 estable, Vite 8.x, Node.js 24 LTS y npm**, por features y componentes reutilizables, separando administración y storefront. HTML y CSS siguen siendo parte de la interfaz. No Create React App. TypeScript 7.0 ya es estable; se mantiene TypeScript 6 inicialmente para evitar tooling dual durante la transición de la API programática/ecosistema. Reevaluar con TypeScript 7.1 o posteriores cuando el toolchain permita adoptarlo limpiamente, según el [baseline técnico](../development/technical-baseline.md).
 
 React Router y TanStack Query son la dirección prevista para routing y server state cuando exista un flujo que los necesite. No agregar Redux/Zustand u otra librería de estado global sin necesidad concreta. Bootstrap y fetch permanecen como propuestas; biblioteca visual y detalles de acceso HTTP se evaluarán sin instalar paquetes por anticipado. Angular, PHP y Razor/MVC no son el stack previsto; jQuery no se añade por defecto.
 

@@ -15,9 +15,13 @@ Phase 0 — Foundation. El repositorio contiene documentación, AGENTS.md, .giti
 
 Ya están aceptados plataforma, arquitectura por capas, proveedor Oracle/EF Core 10, MySQL 8.4 LTS, tenant compartido e Identity/cookies. REST JSON y ProblemDetails son las convenciones HTTP iniciales. No volver a presentarlos como decisiones pendientes.
 
-Antes del primer código, concretar lo que bloquee el caso de uso: membresías/roles, nombres, contratos específicos y dependencias justificadas. Registrar decisiones importantes en ADR. No hace falta cerrar todo el producto para iniciar una fase.
+El esqueleto técnico de Phase 0 no requiere cerrar si un usuario pertenece a una o múltiples compañías, memberships, roles definitivos, invitaciones ni alta administrativa. Estas decisiones siguen abiertas y corresponden a **Phase 1 — Identity & Multi-tenancy**: deberán resolverse antes de implementar el modelo funcional de Identity/multi-tenancy que dependa de ellas.
+
+Concretar nombres, contratos específicos y dependencias cuando el caso de uso los necesite; registrar decisiones arquitectónicas importantes en ADR. No hace falta cerrar todo el producto para crear el scaffolding.
 
 Al implementar, crear global.json para SDK 10 compatible con la política de roll-forward del baseline, registrar versiones resueltas y verificarlas con las pruebas apropiadas. No instalar paquetes ni crear proyectos, migraciones o workflows durante esta tarea documental.
+
+Al crear el scaffolding real de Phase 0, incorporar CI básico con GitHub Actions para restore/install, build, lint/format cuando corresponda y tests disponibles, proporcional al estado inicial. Phase 8 ampliará el pipeline de delivery y sus controles operativos; CD solo con destino de despliegue definido. No crear workflows en esta tarea documental.
 
 Crear proyectos y carpetas cuando tengan contenido funcional y exista una tarea de implementación. Acordar contratos y componentes compartidos antes de dividir trabajo entre módulos.
 

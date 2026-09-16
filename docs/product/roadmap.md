@@ -10,13 +10,15 @@ Las fases pueden solaparse o cambiar según dependencias y aprendizaje. Pruebas,
 - Baseline aceptado: .NET 10/ASP.NET Core 10/C# 14, frontend y herramientas de pruebas; arquitectura, proveedor Oracle/EF Core 10, tenant compartido e Identity/cookies formalizados en ADR-0002 a ADR-0005.
 - Al comenzar implementación, verificar versiones resueltas y compatibilidad en ejecución; crear global.json y archivos de bloqueo apropiados según el [baseline técnico](../development/technical-baseline.md).
 - Crear solución inicial backend y frontend inicial al comenzar implementación.
-- REST JSON y ProblemDetails aceptados; concretar convenciones restantes con primeros casos de uso. CI básico cuando exista código, sin workflows en esta tarea documental.
+- REST JSON y ProblemDetails aceptados; concretar convenciones restantes con primeros casos de uso.
+- Al crear el scaffolding real, crear CI básico con GitHub Actions: restore/install, build, lint/format cuando corresponda y tests disponibles, proporcional al estado inicial. Sin workflows en esta tarea documental.
 - Referencia de salida: base mínima reproducible y documentada.
 
 ## Phase 1 — Identity & Multi-tenancy
 
 - Compañías y usuarios administrativos.
-- Implementar Identity/cookies y autorización; resolver una o múltiples memberships y roles.
+- Resolver una o múltiples compañías por usuario, memberships, roles definitivos e invitaciones/alta administrativa antes de implementar el modelo funcional de Identity/multi-tenancy que dependa de esas decisiones. Siguen abiertas y no bloquean el esqueleto técnico de Phase 0.
+- Implementar Identity/cookies y autorización conforme a esas definiciones.
 - Implementar base/tablas compartidas, discriminador, query filters y validaciones de escrituras/relaciones conforme al ADR-0004.
 - Referencia de salida: integration tests obligatorios de acceso permitido y denegado entre al menos dos compañías, con MySQL real para persistencia relevante.
 
@@ -64,7 +66,8 @@ Las fases pueden solaparse o cambiar según dependencias y aprendizaje. Pruebas,
 
 ## Phase 8 — Delivery
 
-- GitHub Actions, CI completo y CD.
+- Ampliar la automatización de GitHub Actions iniciada en Phase 0 con CI completo y el pipeline de delivery.
+- Incorporar CD solo cuando exista un destino de despliegue definido y añadir los controles operativos/deployment correspondientes.
 - Cloud deployment, HTTPS y base de datos desplegada.
 - Demo pública e instrucciones operativas y de recuperación.
 - Referencia de salida: despliegue verificable; proveedor y estrategia sujetos a evaluación.

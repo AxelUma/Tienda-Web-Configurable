@@ -27,7 +27,11 @@ Persistencia se formaliza en [ADR-0003](../architecture/adr/0003-ef-core-mysql-p
 | Runtime de desarrollo | Node.js 24 LTS |
 | Gestor de paquetes | npm |
 
-No adoptar TypeScript 7 mientras siga beta ni usar Create React App. React Router y TanStack Query son la dirección prevista para routing y server state cuando el primer flujo los necesite; no se instalan por anticipado. No agregar Redux, Zustand u otra librería de estado global sin necesidad concreta.
+**Aclaración del 15 de septiembre de 2026:** TypeScript 7.0 es estable desde julio de 2026. Se mantiene **TypeScript 6 estable** como baseline inicial del scaffolding porque 7.0 aún no ofrece la API programática estable que necesitan algunas herramientas. La [documentación oficial de TypeScript](https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/) menciona typescript-eslint y contempla ejecución side-by-side con TypeScript 6 durante la transición.
+
+El [template oficial React + TypeScript de Vite 8](https://github.com/vitejs/vite/blob/main/packages/create-vite/template-react-ts/package.json), revisado en esa fecha, también mantiene TypeScript 6. El proyecto difiere TypeScript 7 para evitar una configuración dual o complejidad de tooling innecesaria. Reevaluar con TypeScript 7.1 o posteriores cuando la API y el toolchain elegido permitan adoptarlo limpiamente; no es una prohibición permanente ni una actualización automática por número de versión. Los parches de TypeScript 6 siguen la política de actualizaciones compatibles y verificadas, sin fijar un parche perpetuo.
+
+No usar Create React App. React Router y TanStack Query son la dirección prevista para routing y server state cuando el primer flujo los necesite; no se instalan por anticipado. No agregar Redux, Zustand u otra librería de estado global sin necesidad concreta.
 
 ## Reproducibilidad y mantenimiento
 

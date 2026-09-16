@@ -6,7 +6,8 @@ Sin despliegue ni proveedor elegido. Delivery busca una demo pública reproducib
 
 - Docker y Docker Compose, configuración de entornos y health checks.
 - Logs estructurados y observabilidad básica; herramientas concretas aún abiertas.
-- Ampliar CI básico a GitHub Actions con validaciones completas y CD cuando exista destino definido.
+- Phase 0: al crear el scaffolding real, incorporar CI básico con GitHub Actions para restore/install, build, lint/format cuando corresponda y tests disponibles, proporcional al estado inicial.
+- Phase 8 — Delivery: ampliar esa automatización con el pipeline completo de delivery y controles operativos/deployment; incorporar CD únicamente cuando exista un destino definido.
 - Documentar configuración, secretos, persistencia y recuperación.
 
 Son actividades futuras y evolutivas; no hay contenedores, workflows ni infraestructura creada.
