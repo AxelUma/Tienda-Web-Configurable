@@ -34,4 +34,4 @@ Son razones de diseño, no resultados de benchmarks o prototipos comparativos.
 - Las dependencias apuntan hacia el negocio; API concentra la composición de implementaciones.
 - Los casos de uso verifican autorización y aislamiento además de los controles HTTP.
 - Nuevas features deben respetar límites y aportar pruebas apropiadas, evitando interfaces que solo repliquen APIs existentes.
-- Los proyectos aún no existen. Cambiar estos límites requiere otro ADR.
+- Al aceptar este ADR los proyectos aún no existían; el scaffolding del 16 de septiembre de 2026 materializa estos límites. Cambiarlos requiere otro ADR.

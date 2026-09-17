@@ -1,6 +1,6 @@
 # Roadmap
 
-Plan evolutivo por fases técnicas, sin fechas arbitrarias ni compromiso contractual. Estado: **Phase 0 — Foundation, formalización documental de decisiones**; ninguna fase de implementación está completada.
+Plan evolutivo por fases técnicas, sin fechas arbitrarias ni compromiso contractual. Estado: **Phase 0 — Foundation, scaffolding técnico creado y verificado en CI Ubuntu**; Phase 1 no ha comenzado.
 
 Las fases pueden solaparse o cambiar según dependencias y aprendizaje. Pruebas, seguridad y documentación acompañan al código desde el inicio; Quality amplía cobertura y revisiones, no las posterga.
 
@@ -8,10 +8,10 @@ Las fases pueden solaparse o cambiar según dependencias y aprendizaje. Pruebas,
 
 - Consolidar visión, requisitos, arquitectura, ADR y preguntas abiertas.
 - Baseline aceptado: .NET 10/ASP.NET Core 10/C# 14, frontend y herramientas de pruebas; arquitectura, proveedor Oracle/EF Core 10, tenant compartido e Identity/cookies formalizados en ADR-0002 a ADR-0005.
-- Al comenzar implementación, verificar versiones resueltas y compatibilidad en ejecución; crear global.json y archivos de bloqueo apropiados según el [baseline técnico](../development/technical-baseline.md).
-- Crear solución inicial backend y frontend inicial al comenzar implementación.
+- global.json y locks NuGet/npm creados; versiones resueltas en el [baseline técnico](../development/technical-baseline.md).
+- Solución Tienda.slnx con cuatro capas, tres proyectos de tests y frontend inicial creados.
 - REST JSON y ProblemDetails aceptados; concretar convenciones restantes con primeros casos de uso.
-- Al crear el scaffolding real, crear CI básico con GitHub Actions: restore/install, build, lint/format cuando corresponda y tests disponibles, proporcional al estado inicial. Sin workflows en esta tarea documental.
+- CI básico de GitHub Actions configurado para restore/install, build, lint/format, pruebas y smoke E2E. Resultados y limitaciones en el [registro de verificación](../development/phase-0-verification.md).
 - Referencia de salida: base mínima reproducible y documentada.
 
 ## Phase 1 — Identity & Multi-tenancy

@@ -1,10 +1,10 @@
 # Arquitectura prevista
 
-Estado: dirección de diseño; no existen proyectos ni componentes implementados.
+Estado: scaffolding de Phase 0 creado. Existen los cuatro proyectos backend, frontend inicial y pruebas; las capacidades de negocio y el modelo persistente siguen sin implementar.
 
 ## Backend modular
 
-API sobre **.NET 10 LTS, ASP.NET Core 10 y C# 14**, organizada por features/casos de uso dentro de las capas. [ADR-0002](adr/0002-modular-layered-architecture.md) formaliza esta arquitectura. Clean Architecture y DDD son guías pragmáticas. SDK inicial 10.0.401 y política del futuro global.json en el [baseline técnico](../development/technical-baseline.md); no adoptar .NET 11 RC.
+API sobre **.NET 10 LTS, ASP.NET Core 10 y C# 14**, organizada por features/casos de uso dentro de las capas. [ADR-0002](adr/0002-modular-layered-architecture.md) formaliza esta arquitectura. Clean Architecture y DDD son guías pragmáticas. SDK 10.0.401 y política de global.json en el [baseline técnico](../development/technical-baseline.md); no adoptar .NET 11 RC.
 
 | Capa | Responsabilidad | Dependencias entre capas |
 | --- | --- | --- |
@@ -38,7 +38,7 @@ Panel administrativo con ASP.NET Core Identity y cookies, no JWT por defecto ni 
 - No introducir /api/v1 todavía. Añadir versionado al existir un consumidor externo o necesidad de mantener contratos simultáneos.
 - Paginación, filtros y ordenamiento se concretarán con el primer listado real.
 
-No hay endpoints implementados. Estas convenciones no eligen nombres de rutas ni formato definitivo de listados.
+Solo existe /health como comprobación técnica de arranque, con manejo de errores ProblemDetails. No hay endpoints de negocio. Estas convenciones no eligen nombres de rutas ni formato definitivo de listados.
 
 ## Diseño, contenido y archivos
 
@@ -48,7 +48,7 @@ No hay endpoints implementados. Estas convenciones no eligen nombres de rutas ni
 
 Productos y noticias se consumen desde sus módulos; los bloques no duplican registros completos. Cambiar un texto obtenido de la API no debería requerir recompilar por compañía. Esto no exige actualizaciones en tiempo real.
 
-## Estructura futura aproximada
+## Estructura del scaffolding
 
 ```text
 src/
@@ -59,12 +59,17 @@ src/
     Tienda.Infrastructure/
   frontend/
 tests/
+  backend/
+    Tienda.Domain.Tests/
+    Tienda.Application.Tests/
+    Tienda.Api.IntegrationTests/
 docs/
-infra/
 .github/
+  workflows/
+    ci.yml
 ```
 
-Guía para cuando comience la implementación, sin crear carpetas vacías. Proyectos de pruebas y módulos se concretarán con los primeros casos de uso.
+Tienda.slnx incluye los siete proyectos .NET. Infrastructure solo referencia Application; no necesita referencia directa a Domain todavía. API referencia Application e Infrastructure para composición, sin servicios ficticios. No existe carpeta infra ni Compose decorativo; Testcontainers cubre la comprobación MySQL.
 
 ## Open Questions
 

@@ -1,32 +1,83 @@
 # Cómo empezar
 
-## Estado real
+## Estado y requisitos
 
-Phase 0 — Foundation. El repositorio contiene documentación, AGENTS.md, .gitignore y LICENSE. No existen solución .NET, frontend React, dependencias instaladas, migraciones, workflows ni aplicación ejecutable. Todavía no hay comandos de instalación, build o pruebas.
+Phase 0 — Foundation: scaffolding técnico, sin funcionalidades de negocio. Leer [README](../../README.md), [AGENTS](../../AGENTS.md), [baseline](technical-baseline.md) y [pruebas](testing.md). Los resultados reales se registran en [verificación de Phase 0](phase-0-verification.md).
 
-## Lectura inicial
+- .NET SDK 10.0.401; global.json permite patches de la misma banda, sin prereleases.
+- Node.js 24.13.0 según .nvmrc y npm 11.6.2. Con nvm compatible, usar nvm install/nvm use; Windows puede instalar esa versión mediante su gestor habitual.
+- Docker disponible con contenedores Linux para el test MySQL. No se necesita MySQL instalado ni una base de desarrollo.
+- Chromium de Playwright para E2E; en Linux se requieren sus dependencias del sistema.
 
-1. [README](../../README.md) y [AGENTS](../../AGENTS.md).
-2. [Visión](../product/vision.md), [requisitos](../product/requirements.md) y [roadmap](../product/roadmap.md).
-3. [Arquitectura](../architecture/overview.md), modelo conceptual, multi-tenancy, seguridad y persistencia enlazados desde README.
-4. [ADR](../architecture/adr/README.md), [baseline técnico](technical-baseline.md), [estrategia de pruebas](testing.md) y Open Questions del área de trabajo.
+## Backend (desde la raíz)
 
-## Antes del primer código
+```sh
+dotnet --info
+dotnet restore Tienda.slnx --locked-mode
+dotnet build Tienda.slnx --no-restore --configuration Release
+dotnet run --project src/backend/Tienda.Api --urls http://localhost:5080
+```
 
-Ya están aceptados plataforma, arquitectura por capas, proveedor Oracle/EF Core 10, MySQL 8.4 LTS, tenant compartido e Identity/cookies. REST JSON y ProblemDetails son las convenciones HTTP iniciales. No volver a presentarlos como decisiones pendientes.
+GET http://localhost:5080/health devuelve Healthy si arranca. No consulta base de datos ni acredita readiness de negocio. Configuración base en appsettings.json; variables ASP.NET Core pueden sobrescribirla por entorno. No hay secretos ni connection strings de negocio.
 
-El esqueleto técnico de Phase 0 no requiere cerrar si un usuario pertenece a una o múltiples compañías, memberships, roles definitivos, invitaciones ni alta administrativa. Estas decisiones siguen abiertas y corresponden a **Phase 1 — Identity & Multi-tenancy**: deberán resolverse antes de implementar el modelo funcional de Identity/multi-tenancy que dependa de ellas.
+```sh
+dotnet test --solution Tienda.slnx --no-build --configuration Release
+dotnet format Tienda.slnx --no-restore --verify-no-changes
+dotnet format Tienda.slnx --no-restore
+```
 
-Concretar nombres, contratos específicos y dependencias cuando el caso de uso los necesite; registrar decisiones arquitectónicas importantes en ADR. No hace falta cerrar todo el producto para crear el scaffolding.
+El runner es Microsoft.Testing.Platform (seleccionado en global.json), con xUnit v3. La primera orden de formato comprueba y la segunda aplica correcciones.
 
-Al implementar, crear global.json para SDK 10 compatible con la política de roll-forward del baseline, registrar versiones resueltas y verificarlas con las pruebas apropiadas. No instalar paquetes ni crear proyectos, migraciones o workflows durante esta tarea documental.
+Si solo se desea ejecutar pruebas sin Docker, hacerlo explícitamente:
 
-Al crear el scaffolding real de Phase 0, incorporar CI básico con GitHub Actions para restore/install, build, lint/format cuando corresponda y tests disponibles, proporcional al estado inicial. Phase 8 ampliará el pipeline de delivery y sus controles operativos; CD solo con destino de despliegue definido. No crear workflows en esta tarea documental.
+```sh
+dotnet test --solution Tienda.slnx --no-build -c Release -- --filter-not-trait Category=Docker
+```
 
-Crear proyectos y carpetas cuando tengan contenido funcional y exista una tarea de implementación. Acordar contratos y componentes compartidos antes de dividir trabajo entre módulos.
+Esto no verifica persistencia. El CI completo no utiliza ese filtro. La prueba Docker arranca y elimina su contenedor MySQL con credenciales efímeras de Testcontainers.
 
-## Prácticas previstas
+## Frontend (desde src/frontend)
 
-Código nuevo incluirá pruebas apropiadas y actualización documental. Priorizar aislamiento entre compañías, independencia de secciones, parámetros compartidos, totales/estados de pedidos y validación de archivos. Las herramientas ya están definidas en la estrategia de pruebas; los comandos se documentarán al crear la solución. Aislamiento entre al menos dos compañías es obligatorio desde Phase 1. Ahora no hay pruebas de aplicación que reportar.
+```sh
+node --version
+npm --version
+npm ci
+npm run dev
+```
 
-Revisar .gitignore al introducir herramientas. El archivo actual contempla artefactos Visual Studio/.NET, node_modules y archivos .env; eso no implica selección de dependencias. No versionar credenciales.
+Vite escucha en 127.0.0.1 y muestra su puerto (5173 por defecto). La pantalla no requiere API ni implementa administración/storefront.
+
+```sh
+npm run lint
+npm run format:check
+npm run format
+npm run build
+npm test
+npm run test:watch
+```
+
+Lint usa Oxlint; formato usa Oxfmt. build comprueba TypeScript y genera dist; test ejecuta Vitest sin interacción. test:watch es solo para desarrollo.
+
+```sh
+npx playwright install chromium
+npm run build
+npm run test:e2e
+```
+
+En Ubuntu, instalar navegador y dependencias mediante `npx playwright install --with-deps chromium`. Playwright inicia vite preview en 127.0.0.1:4173 sobre dist y lo detiene; el puerto debe estar libre.
+
+## CI y reproducibilidad
+
+[ci.yml](../../.github/workflows/ci.yml) valida push/PR hacia main en Ubuntu 24.04: restore bloqueado, build Release, dotnet format y todos los tests backend; npm ci, lint, formato, build, Vitest y Playwright Chromium. No hay CD ni secretos cloud.
+
+NuGet usa Central Package Management y packages.lock.json; npm usa package-lock.json. Para una actualización intencionada, modificar versiones centrales/package.json, regenerar locks con dotnet restore/npm install y repetir las verificaciones. No editar los locks manualmente.
+
+## Limitaciones del equipo de validación
+
+En este Windows, Docker no está instalado y Control de aplicaciones bloqueó algunas DLL de tests y el binding nativo de Rolldown. No desactivar ni eludir esa política; validar en un entorno autorizado como CI Ubuntu. La ausencia de dist por ese bloqueo también impide la smoke E2E local.
+
+Si npm muestra UNABLE_TO_VERIFY_LEAF_SIGNATURE en este entorno, Node 24 puede usar el almacén de certificados del sistema. En PowerShell, `$env:NODE_USE_SYSTEM_CA = '1'` antes de npm ci resolvió la confianza TLS; no deshabilitar strict-ssl.
+
+## Decisiones pendientes
+
+Una o múltiples compañías por usuario, memberships, roles definitivos, invitaciones y alta administrativa siguen abiertas para Phase 1, antes del modelo funcional que las necesite. El scaffolding no las resuelve. También siguen abiertas las demás Open Questions de producto, persistencia, seguridad y despliegue; no crear entidades ficticias para llenar estas capas.

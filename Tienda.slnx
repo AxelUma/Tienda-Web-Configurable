@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/backend/">
+    <Project Path="src/backend/Tienda.Api/Tienda.Api.csproj" />
+    <Project Path="src/backend/Tienda.Application/Tienda.Application.csproj" />
+    <Project Path="src/backend/Tienda.Domain/Tienda.Domain.csproj" />
+    <Project Path="src/backend/Tienda.Infrastructure/Tienda.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/" />
+  <Folder Name="/tests/backend/">
+    <Project Path="tests/backend/Tienda.Api.IntegrationTests/Tienda.Api.IntegrationTests.csproj" />
+    <Project Path="tests/backend/Tienda.Application.Tests/Tienda.Application.Tests.csproj" />
+    <Project Path="tests/backend/Tienda.Domain.Tests/Tienda.Domain.Tests.csproj" />
+  </Folder>
+</Solution>

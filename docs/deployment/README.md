@@ -6,11 +6,11 @@ Sin despliegue ni proveedor elegido. Delivery busca una demo pública reproducib
 
 - Docker y Docker Compose, configuración de entornos y health checks.
 - Logs estructurados y observabilidad básica; herramientas concretas aún abiertas.
-- Phase 0: al crear el scaffolding real, incorporar CI básico con GitHub Actions para restore/install, build, lint/format cuando corresponda y tests disponibles, proporcional al estado inicial.
+- Phase 0: CI básico de GitHub Actions configurado para restore/install, build, lint/format y pruebas; incluye Testcontainers/MySQL y Playwright.
 - Phase 8 — Delivery: ampliar esa automatización con el pipeline completo de delivery y controles operativos/deployment; incorporar CD únicamente cuando exista un destino definido.
 - Documentar configuración, secretos, persistencia y recuperación.
 
-Son actividades futuras y evolutivas; no hay contenedores, workflows ni infraestructura creada.
+CI básico y /health existen como scaffolding. Docker/MySQL se usa de forma efímera en tests mediante Testcontainers; no existe Compose, infraestructura desplegada ni CD. Logs estructurados y observabilidad concreta siguen como trabajo futuro.
 
 ## Consideraciones
 

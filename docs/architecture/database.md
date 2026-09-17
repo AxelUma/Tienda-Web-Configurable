@@ -8,7 +8,7 @@ Los parches no son una congelación permanente: actualizar con compatibilidad ve
 
 [ADR-0004](adr/0004-shared-database-multitenancy.md) fija una base y tablas compartidas con CompanyId/TenantId en datos de compañía; no database-per-tenant ni schema-per-tenant inicialmente. Query filters como defensa de lectura más validaciones de escrituras/relaciones y restricciones por tenant cuando sea viable.
 
-No hay base creada, esquema definitivo, paquetes instalados ni migraciones. La selección está aceptada; la verificación en ejecución se realizará con la implementación.
+Infrastructure referencia EF Core y el proveedor Oracle, con versiones resueltas y bloqueadas. No hay DbContext, base de negocio, esquema definitivo ni migraciones. La prueba Testcontainers comprueba conectividad MySQL con el driver Oracle; no demuestra todavía consultas EF ni aislamiento. Ver [pruebas](../development/testing.md).
 
 MySQL conservará datos del negocio y referencias de archivos. Los archivos se prevén en almacenamiento persistente externo a las tablas de contenido, sin proveedor elegido. El [modelo de dominio](domain-model.md) es conceptual.
 
