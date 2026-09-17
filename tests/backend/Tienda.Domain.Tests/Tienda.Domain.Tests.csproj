@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <IsTestProject>true</IsTestProject>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="xunit.v3" />
+    <ProjectReference Include="../../../src/backend/Tienda.Domain/Tienda.Domain.csproj" />
+    <Using Include="Xunit" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="../../../src/backend/Tienda.Domain/Tienda.Domain.csproj" Link="Architecture/Tienda.Domain.csproj" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

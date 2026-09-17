@@ -427,3 +427,12 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# Frontend build and test output
+dist/
+coverage/
+playwright-report/
+test-results/
+*.tsbuildinfo
+.env.*
+!.env.example

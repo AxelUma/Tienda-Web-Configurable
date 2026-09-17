@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <ItemGroup>
+    <ProjectReference Include="../Tienda.Application/Tienda.Application.csproj" />
+    <ProjectReference Include="../Tienda.Infrastructure/Tienda.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>

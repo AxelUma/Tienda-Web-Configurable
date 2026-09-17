@@ -1,6 +1,16 @@
 # Estrategia inicial de pruebas
 
-Baseline aceptado en Phase 0; todavía no existen proyectos de pruebas ni resultados de ejecución de la aplicación. Se incorporarán pruebas junto al código correspondiente.
+Existen tres proyectos backend y pruebas frontend del scaffolding de Phase 0. Resultados y límites del equipo en el [registro de verificación](phase-0-verification.md).
+
+## Pruebas actuales
+
+- Tienda.Domain.Tests: el proyecto Domain no declara dependencias de proyecto, paquetes ni frameworks adicionales.
+- Tienda.Application.Tests: Application referencia solo Domain y no agrega frameworks/paquetes.
+- Tienda.Api.IntegrationTests: WebApplicationFactory verifica arranque en /health y ProblemDetails 404; una prueba Category=Docker abre MySQL 8.4.6 con Testcontainers y ejecuta SELECT VERSION() mediante el driver Oracle.
+- Vitest/React Testing Library: el componente inicial identifica el proyecto e informa que las funciones de negocio no están disponibles.
+- Playwright/Chromium: navegación y contenido de la compilación de producción mediante vite preview.
+
+No hay DbContext ni entidades artificiales. La prueba MySQL comprueba conectividad, no consultas EF, migraciones ni aislamiento: esas pruebas de persistencia real llegan con el modelo de Phase 1. Los checks de dependencias leen los csproj copiados al output; no sustituyen una revisión completa de arquitectura.
 
 ## Backend
 
@@ -14,7 +24,7 @@ Baseline aceptado en Phase 0; todavía no existen proyectos de pruebas ni result
 
 Usar al menos dos compañías y verificar acceso autorizado y denegado: lecturas, creación, modificación, eliminación y asociaciones. Incluir intentos de manipular CompanyId del cliente y recursos de otro tenant. Los filtros no sustituyen pruebas de escrituras ni de operaciones que omiten filtros, si existen.
 
-Mantener datos y ciclo de vida de pruebas aislados y reproducibles. La estructura concreta de proyectos/fixtures se definirá con el primer flujo, no mediante scaffolding anticipado.
+Mantener datos y ciclo de vida de pruebas aislados y reproducibles. Los fixtures del modelo de negocio se definirán con el primer flujo; el test de conectividad actual no define ese modelo.
 
 ## Frontend
 
@@ -26,4 +36,4 @@ Priorizar acceso administrativo, aislamiento visible, catálogo de la compañía
 
 ## Evolución
 
-Pruebas y seguridad comienzan con el código. Phase 6 amplía cobertura, accesibilidad y revisión de rendimiento; no posterga obligaciones de Phase 1. Medir rendimiento antes de optimizar. Los comandos y la integración continua se documentarán al existir proyectos y flujos ejecutables.
+Pruebas y seguridad comienzan con el código. Phase 6 amplía cobertura, accesibilidad y revisión de rendimiento; no posterga obligaciones de Phase 1. Medir rendimiento antes de optimizar. Comandos en [cómo empezar](getting-started.md). El CI actual ejecuta todos los tests, incluida conectividad MySQL; no omite la categoría Docker.

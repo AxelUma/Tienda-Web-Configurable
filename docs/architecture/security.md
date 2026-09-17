@@ -1,6 +1,6 @@
 # Seguridad prevista
 
-Phase 0: decisiones aceptadas, sin autenticación ni controles implementados.
+Phase 0: decisiones aceptadas, sin autenticación ni controles de autorización implementados. La API mínima registra ProblemDetails.
 
 ## Autenticación administrativa aceptada
 
@@ -34,4 +34,4 @@ OAuth/OIDC/bearer permanece como estrategia futura abierta para móviles, integr
 - Correos, si se incorporan: eventos, proveedor y manejo de errores.
 - Estrategia futura OAuth/OIDC/bearer solo si aparecen los consumidores indicados.
 
-La configuración concreta se probará con el flujo real; no hay permisos, sesiones ni infraestructura funcionando todavía.
+La configuración concreta se probará con el flujo real; no hay permisos ni sesiones administrativas implementados; solo existe infraestructura técnica de scaffolding y CI.
